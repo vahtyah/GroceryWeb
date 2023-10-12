@@ -20,10 +20,8 @@
 </head>
 
 <body>
-
-     
     <?php
-        include('config/config.php');
+        include('../config/config.php');
         include("modules/header.php");
         include("modules/main.php");
     ?>

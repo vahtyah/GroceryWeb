@@ -13,7 +13,7 @@ $query_list = mysqli_query($conn, $sql);
                     <table class="table table-hover tm-table-small tm-product-table">
                         <thead>
                             <tr>
-                                <th scope="col">&nbsp;</th>
+                                <!-- <th scope="col">&nbsp;</th> -->
                                 <th scope="col">PRODUCT NAME</th>
                                 <th scope="col">PRICE</th>
                                 <th scope="col">DESCRIPTION</th>
@@ -26,7 +26,7 @@ $query_list = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_array($query_list)) {
                                 ?>
                                 <tr>
-                                    <th scope="row"><input type="checkbox" /></th>
+                                    <!-- <th scope="row"><input type="checkbox" /></th> -->
                                     <td class="tm-product-name">
                                         <a href="?action=edit-product&id=<?php echo $row['id'] ?>" class="product-link">
                                             <?php echo $row["name"] ?>
@@ -57,9 +57,9 @@ $query_list = mysqli_query($conn, $sql);
                 <!-- table container -->
                 <a href="index.php?action=add-product" class="btn btn-primary btn-block text-uppercase mb-3">Add new
                     product</a>
-                <button class="btn btn-primary btn-block text-uppercase">
+                <!-- <button class="btn btn-primary btn-block text-uppercase">
                     Delete selected products
-                </button>
+                </button> -->
             </div>
         </div>
     </div>

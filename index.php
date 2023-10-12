@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -38,16 +40,13 @@
 <body>
 
     <?php
-        include("pages/header.php");
-        include("pages/main.php");
-        include("pages/footer.php");
+    session_start();
+    
+    include('config/config.php');
+    include("modules/header.php");
+    include("modules/main.php");
+    include("modules/footer.php");
     ?>
-
-
-   
-
-
-   
 
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
@@ -67,6 +66,7 @@
     <script src="js/form-validator.min.js"></script>
     <script src="js/contact-form-script.js"></script>
     <script src="js/custom.js"></script>
+
 </body>
 
 </html>
