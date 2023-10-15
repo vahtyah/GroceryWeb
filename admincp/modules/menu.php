@@ -17,6 +17,7 @@ $query_list = mysqli_query($conn, $sql);
                                 <th scope="col">PRODUCT NAME</th>
                                 <th scope="col">PRICE</th>
                                 <th scope="col">DESCRIPTION</th>
+                                <th scope="col">DISCOUNT</th>
                                 <th scope="col">&nbsp;</th>
                             </tr>
                         </thead>
@@ -38,6 +39,9 @@ $query_list = mysqli_query($conn, $sql);
                                     </td>
                                     <td>
                                         <?php echo $row["description"] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row["discount"] ?>
                                     </td>
 
                                     <td>

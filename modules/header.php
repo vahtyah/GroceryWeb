@@ -75,16 +75,22 @@ if (isset($_SESSION['username'])) {
     $array = array();
     if ($row) {
         $id_products = $row['id_products'];
-        if ($id_products != "") {
-            $array = explode(',', $id_products);
-            array_pop($array);
-        }
+        $array = explode(',', $id_products);
+        array_pop($array);
 
         //FUNCTION
         $totalPrice = "SELECT CalculateTotalPrice('$id_products') AS total_price";
         $query = mysqli_query($conn, $totalPrice);
         $row = mysqli_fetch_array($query);
         $totalPrice = $row['total_price'];
+
+        //PROCEDURE
+        $idCount = 0;
+        $sql = "CALL CountProductIDs('$id_products', @idCount)";
+        $query = mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, "SELECT @idCount AS idCount");
+        $row = mysqli_fetch_assoc($result);
+        $idCount = $row['idCount'];
     }
 }
 
@@ -137,7 +143,7 @@ if (isset($_SESSION['username'])) {
                     <li class="side-menu">
                         <a href="#">
                             <i class="fa fa-shopping-bag"></i>
-                            <span class="badge">' . count($array) . '</span>
+                            <span class="badge">' .$idCount . '</span>
                             <p>My Cart</p>
                         </a>
                     </li>
