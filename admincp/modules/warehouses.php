@@ -1,7 +1,18 @@
 <?php
-$sql = "SELECT * FROM `products`";
+$sql = "SELECT * FROM `warehouses`";
 
 $query_list = mysqli_query($conn, $sql);
+
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $sql = "DELETE FROM `warehouses` WHERE id = $id";
+    $query = mysqli_query($conn, $sql);
+    if($query){
+        header('Location: index.php?action=warehouse');
+    }else{
+        echo "Lỗi: " . $sql . "<br>" . $conn->error;
+    }
+}
 
 ?>
 
@@ -14,10 +25,9 @@ $query_list = mysqli_query($conn, $sql);
                         <thead>
                             <tr>
                                 <!-- <th scope="col">&nbsp;</th> -->
-                                <th scope="col">PRODUCT NAME</th>
-                                <th scope="col">PRICE</th>
-                                <th scope="col">DESCRIPTION</th>
-                                <th scope="col">DISCOUNT</th>
+                                <th scope="col">NAME</th>
+                                <th scope="col">LOCATION</th>
+                                <th scope="col">CAPACITY</th>
                                 <th scope="col">&nbsp;</th>
                             </tr>
                         </thead>
@@ -29,23 +39,20 @@ $query_list = mysqli_query($conn, $sql);
                                 <tr>
                                     <!-- <th scope="row"><input type="checkbox" /></th> -->
                                     <td class="tm-product-name">
-                                        <a href="?action=edit-product&id=<?php echo $row['id'] ?>" class="product-link">
+                                        <a href="?action=edit-warehouse&id=<?php echo $row['id'] ?>" class="product-link">
                                             <?php echo $row["name"] ?>
                                         </a>
 
                                     </td>
                                     <td>
-                                        <?php echo $row["price"] ?>
+                                        <?php echo $row["location"] ?>
                                     </td>
                                     <td>
-                                        <?php echo $row["description"] ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $row["discount"] ?>
+                                        <?php echo $row["capacity"] ?>
                                     </td>
 
                                     <td>
-                                        <a type="submit" href="modules/handle.php?id=<?php echo $row['id'] ?>"
+                                        <a type="submit" href="?action=warehouse&id=<?php echo $row['id'] ?>"
                                             class="tm-product-delete-link">
                                             <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                         </a>
@@ -59,8 +66,8 @@ $query_list = mysqli_query($conn, $sql);
                     </table>
                 </div>
                 <!-- table container -->
-                <a href="index.php?action=add-product" class="btn btn-primary btn-block text-uppercase mb-3">Add new
-                    product</a>
+                <a href="index.php?action=add-warehouse" class="btn btn-primary btn-block text-uppercase mb-3">Add new
+                    warehouse</a>
                 <!-- <button class="btn btn-primary btn-block text-uppercase">
                     Delete selected products
                 </button> -->

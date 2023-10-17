@@ -11,15 +11,20 @@
         $act = $_GET['action'];
     else $act = '';
 
-    if($act == 'delete-product-in-cart'){
+    if ($act == 'delete-product-in-cart') {
         $id = $_GET['id'];
-        $id_products = str_replace($id . ',', '', $id_products);
-        //delete last element of $id_products
-        $sql = "UPDATE user SET id_products = '$id_products' WHERE username = '$username'";
-        if ($conn->query($sql) === TRUE) {
-            header('Location: http://localhost/GroceryWeb/');
-        } else {
-            echo "Error updating record: " . $conn->error;
+        $idArray = explode(',', $id_products); // Chuyển chuỗi thành mảng
+        $key = array_search($id, $idArray); // Tìm vị trí của phần tử cần xóa
+    
+        if ($key !== false) {
+            unset($idArray[$key]); // Xóa phần tử khỏi mảng
+            $id_products = implode(',', $idArray); // Chuyển mảng thành chuỗi lại
+            $sql = "UPDATE user SET id_products = '$id_products' WHERE username = '$username'";
+            if ($conn->query($sql) === TRUE) {
+                header('Location: http://localhost/GroceryWeb/');
+            } else {
+                echo "Error updating record: " . $conn->error;
+            }
         }
     }
     else if($act == 'add-product-in-cart'){
@@ -31,5 +36,6 @@
         } else {
             echo "Error updating record: " . $conn->error;
         }
-    }    
+    }
+    
 ?>

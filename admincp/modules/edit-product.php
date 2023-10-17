@@ -52,7 +52,23 @@ if ($query) {
                   required><?php echo $productDescription ?></textarea>
               </div>
 
+              <!-- <div class="form-group mb-3">
+                <label for="category">Warehouse</label>
+                <select class="custom-select tm-select-accounts" id="category" name="warehouse">
+                  <option selected="">Select warehouse</option>
 
+                  <?php
+
+                  $sql = "SELECT * FROM warehouses";
+                  $query = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_array($query)) {
+                    echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                  }
+
+                  ?>
+
+                </select>
+              </div> -->
           </div>
           <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
             <div class="tm-product-img-edit mx-auto">

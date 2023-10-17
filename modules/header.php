@@ -372,7 +372,7 @@ if (isset($_SESSION['username'])) {
                     }
                     ?>
                     <li class="total">
-                        <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                        <a href="Pages/Invoice/check.php?total_cost=<?php echo $totalPrice ?>" class="btn btn-default hvr-hover btn-cart">Pay</a>
                         <span class="float-right"><strong>Total</strong>:$<?php echo $totalPrice ?> </span>
                     </li>
                 </ul>

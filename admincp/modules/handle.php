@@ -7,7 +7,8 @@ $image = time() . '_' . $_FILES['image']['name'];
 $image_tmp = $_FILES['image']['tmp_name'];
 
 if (isset($_POST['add-product-on-click'])) {
-    $sql = "INSERT INTO products(name, price, description, image) VALUES('$name', $price, '$description', '$image')";
+    $warehouse_id = $_POST['warehouse'];
+    $sql = "INSERT INTO products(name, price, description,warehouse_id, image) VALUES('$name', $price, '$description','$warehouse_id', '$image')";
     if ($conn->query($sql) === TRUE) {
         echo "Sản phẩm đã được thêm thành công!";
         if (move_uploaded_file($image_tmp, '../../uploads/' . basename($image))) {
@@ -79,6 +80,18 @@ if (isset($_POST['add-product-on-click'])) {
         }
     }
 
+} elseif (isset($_POST['add-warehouse-on-click'])) {
+    $name = $_POST['name'];
+    $location = $_POST['location'];
+    $capacity = $_POST['capacity'];
+
+    $sql = "INSERT INTO warehouses(name, location, capacity) VALUES('$name','$location','$capacity')";
+    if ($conn->query($sql) === TRUE) {
+        echo "Sản phẩm đã được thêm thành công!";
+        header('Location:../index.php');
+    } else {
+        echo "Lỗi: " . $sql . "<br>" . $conn->error;
+    }
 } else {
     $id = $_GET['id'];
     // Truy vấn để lấy tên tệp tin hình ảnh của sản phẩm cần xóa

@@ -1,3 +1,5 @@
+
+
 <div class="container tm-mt-big tm-mb-big">
   <div class="row">
     <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
@@ -28,6 +30,23 @@
                 <textarea id="description" name="description" class="form-control validate" rows="3"
                   required></textarea>
               </div>
+              <div class="form-group mb-3">
+                    <label for="category">Warehouse</label>
+                    <select class="custom-select tm-select-accounts" id="category" name="warehouse">
+                      <option selected="">Select warehouse</option>
+
+                      <?php
+
+                      $sql = "SELECT * FROM warehouses";
+                      $query = mysqli_query($conn, $sql);
+                      while ($row = mysqli_fetch_array($query)) {
+                        echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                      }
+                      
+                      ?>
+                      
+                    </select>
+                  </div>
 
           </div>
           <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
