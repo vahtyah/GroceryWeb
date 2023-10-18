@@ -12,6 +12,7 @@ if ($query) {
     $productName = $row['name'];
     $productPrice = $row['price'];
     $productDescription = $row['description'];
+    $productWarehouse = $row['warehouse_id'];
     $productImage = $row['image'];
 
   } else {
@@ -33,7 +34,8 @@ if ($query) {
         </div>
         <div class="row tm-edit-product-row">
           <div class="col-xl-6 col-lg-6 col-md-12">
-            <form action="modules/handle.php?id=<?php echo $productId ?>" method="POST" class="tm-edit-product-form" enctype="multipart/form-data">
+            <form action="modules/handle.php?id=<?php echo $productId ?>" method="POST" class="tm-edit-product-form"
+              enctype="multipart/form-data">
               <div class="form-group mb-3">
                 <label for="name">Product Name
                 </label>
@@ -52,23 +54,25 @@ if ($query) {
                   required><?php echo $productDescription ?></textarea>
               </div>
 
-              <!-- <div class="form-group mb-3">
+              <div class="form-group mb-3">
                 <label for="category">Warehouse</label>
                 <select class="custom-select tm-select-accounts" id="category" name="warehouse">
-                  <option selected="">Select warehouse</option>
 
                   <?php
-
                   $sql = "SELECT * FROM warehouses";
                   $query = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_array($query)) {
-                    echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                    echo "123";
+                    if ($productWarehouse == $row['id'])
+                      echo "<option value='" . $row['id'] . "' selected=''>" . $row['name'] . "</option>";
+                    else
+                      echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
                   }
 
                   ?>
 
                 </select>
-              </div> -->
+              </div>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
             <div class="tm-product-img-edit mx-auto">
@@ -78,9 +82,9 @@ if ($query) {
                 onclick="document.getElementById('fileInput').click();"></i>
             </div>
             <div class="custom-file mt-3 mb-3">
-            <input id="fileInput" type="file" style="display:none;" name="image" onchange="displayImage(this);"/>
-              <input type="button" class="btn btn-primary btn-block mx-auto" value="UPDATE PRODUCT IMAGE" name="image" id="image"
-                onclick="document.getElementById('fileInput').click();" />
+              <input id="fileInput" type="file" style="display:none;" name="image" onchange="displayImage(this);" />
+              <input type="button" class="btn btn-primary btn-block mx-auto" value="UPDATE PRODUCT IMAGE" name="image"
+                id="image" onclick="document.getElementById('fileInput').click();" />
             </div>
           </div>
           <div class="col-12">
@@ -95,17 +99,17 @@ if ($query) {
 </div>
 
 <script>
-        function displayImage(input) {
-            var selectedImage = document.getElementById('selectedImage');
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+  function displayImage(input) {
+    var selectedImage = document.getElementById('selectedImage');
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    selectedImage.style.display = 'block';
-                    selectedImage.src = e.target.result;
-                };
+      reader.onload = function (e) {
+        selectedImage.style.display = 'block';
+        selectedImage.src = e.target.result;
+      };
 
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>

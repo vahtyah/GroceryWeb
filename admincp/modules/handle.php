@@ -21,7 +21,7 @@ if (isset($_POST['add-product-on-click'])) {
         echo "Lỗi: " . $sql . "<br>" . $conn->error;
     }
 } elseif (isset($_POST['edit-product-on-click'])) {
-
+    $warehouse_id = $_POST['warehouse'];
     $id = $_GET['id'];
     echo $_FILES['image']['name'];
     // Truy vấn để lấy tên tệp tin hình ảnh của sản phẩm cần xóa
@@ -46,6 +46,7 @@ if (isset($_POST['add-product-on-click'])) {
             name = '$name',
             price = '$price',
             description = '$description',
+            warehouse_id = '$warehouse_id',
             image = '$image'
             WHERE id = $id";
 
@@ -68,7 +69,8 @@ if (isset($_POST['add-product-on-click'])) {
         $sql = "UPDATE products SET 
             name = '$name',
             price = '$price',
-            description = '$description'
+            description = '$description',
+            warehouse_id = '$warehouse_id'
             WHERE id = $id";
 
 
